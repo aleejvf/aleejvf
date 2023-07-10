@@ -1,0 +1,146 @@
+##creativos.cl
+list_rut=[12345678,23456789,98765432,87654321]
+escenario=[[1,2,3,4,5,6,7,8,9,10],
+           [11,12,13,14,15,16,17,18,19,20],
+           [21,22,23,24,25,26,27,28,29,30],
+           [31,32,33,34,35,36,37,38,39,40],
+           [41,42,43,44,45,46,47,48,49,50],
+           [51,52,53,54,55,56,57,58,59,60],
+           [61,62,63,64,65,66,67,68,69,70],
+           [71,72,73,74,75,76,77,78,79,80],
+           [81,82,83,84,85,86,87,88,89,90],
+           [91,92,93,94,95,96,97,98,99,100]]
+contP=0
+contG=0
+contS=0
+
+def ingreso_rut():
+  while True:
+   try:
+    rut_u=input("INGRESE SU RUT (sin - ni . y sin digito verificador\n- ") 
+    cont_R=len(rut_u)
+
+    if cont_R==8:
+      list_rut.append(rut_u)
+      print("Se ingreso el rut correctamente\n")
+      break
+
+    else:
+      print("\n-------ERROR--------\n(verifique el rut y vuelva a intentar)\n")
+
+   except:
+    print("ocurrio una exepcion")
+
+def Comprar_entradas():
+    while True:
+        try:
+            contP=0
+            contG=0
+            contS=0
+            ress=int(input("\nCantidad de entradas a comprar- "))
+
+            if ress<4 and ress>0:
+                print(f"{precios}")
+                matriz=len(escenario)
+                print("---ESCENARIO---")
+                for i in range(matriz):
+                    print(escenario[i])            ##se muestra el los asientos
+                
+                while True:
+                    try:  
+                        for i in range(1,ress+1,1):
+                            respu=int(input(f"\nIngrese el asiento que desea (Entrada {i})-"))
+                            if respu>0 and respu<=20:
+                                print("operacion realizada")
+                                contP+=1
+                            elif respu>20 and respu<=50:
+                                print("operacion realizada")
+                                contG+=1
+                            elif respu>50 and respu<=100:
+                                print("operacion realizada")
+                                contS+=1
+                            else:
+                                print("fuera de rango disponible")
+                        break 
+                    except:
+                        print("excepcion")
+                        
+                break   
+            else:
+                print("****ERROR--solo es posible comprar entre 1 a 3 entradas****")
+        except:
+            print("ocurrio una exepcion")
+
+def Mostrar_ubicacion_dispnible():
+    matriz=len(escenario)
+    i=1
+    print("---ESCENARIO---")
+    for i in range(matriz):
+        print(escenario[i])
+
+def Ver_listado_de_asistentes():
+   list_rut.sort()
+   print(list_rut)
+
+def Mostrar_ganancias_totales():
+    totalP=contP*120000
+    totalG=contG*80.000
+    totalS=contS*50.000
+    
+    Ctotal=contP+contG+contS
+    Ttotal=totalP+totalG+totalS
+    print(f"""
+   TIPO ENTRADA   / CANTIDAD /   TOTAL  
+--------------------------------------- 
+Platinum $120.000 /{contP:8} /${totalP:3} 
+Gold     $80.000  /{contG:8} /${totalG:3}
+Silver   $50.000  /{contS:8} /${totalS:3}
+---------------------------------------
+TOTAL             /{Ctotal:8} /${Ttotal:3}""")
+
+def SALIDA():
+    print("""\n---A salido del sistema---
+    
+----Alejandro Benjamin Villanueva Fuentes----
+       ----FECHA: 10/07/2023---""")
+
+menu=("""
+------------MENU-------------
+1-Comprar entradas
+2-Mostrar ubicacion dispnible
+3-Ver listado de asistentes
+4-Mostrar ganancias totales 
+5-Salir
+-----------------------------
+""")
+precios=( """
+---------------------------------------------
+Precios de entradas
+-Platinum / $120000 - (Asientos del 1 al 20)
+-Gold     / $80000  - (Asientos del 21 al 50)
+-Silver   / $50000  - (Asientos del 51 al 100)
+---------------------------------------------""")
+while True:
+    try:
+        print(f"{menu}")
+        resp=int(input("ingrese una opcon- "))
+        if resp==1:
+            Comprar_entradas()
+        elif resp==2:
+            Mostrar_ubicacion_dispnible()
+        elif resp==3:
+            Ver_listado_de_asistentes()
+        elif resp==4:
+            Mostrar_ganancias_totales()
+        elif resp==5:
+            SALIDA()
+            break
+        else:
+            print("Este numero no es aceptable\n-----intente denuevo-----")
+    
+    except:
+        print("ocurrio una exepcion")
+##salida del while del menu
+
+a=input()
+
